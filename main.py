@@ -1,1 +1,3 @@
-from src.mlopsProject.config import configuration
+from mlopsProject import logger
+
+logger.info("This is out custom log!")
