@@ -35,3 +35,14 @@ class ModelTrainerConfig:
     min_child_weight: int
     max_depth: int
     target_column: str
+
+
+@dataclass(frozen=True)
+class ModelEvaluationConfig:
+    root_dir: Path
+    X_test_data_path: Path
+    y_test_data_path: Path
+    model_path: Path
+    all_params: dict
+    metric_file_name: Path
+    target_column: str

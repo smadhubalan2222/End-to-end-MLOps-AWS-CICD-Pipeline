@@ -3,7 +3,8 @@ from mlopsProject.utils.common import read_yaml, create_directories
 from mlopsProject.entity.config_entity import (DataIngestionConfig,
                                             DataValidationConfig,
                                             DataTransformationConfig,
-                                            ModelTrainerConfig)
+                                            ModelTrainerConfig,
+                                            ModelEvaluationConfig)
 
 
 class ConfigurationManager:
@@ -87,3 +88,24 @@ class ConfigurationManager:
         )
 
         return model_trainer_config
+    
+
+
+    def get_model_evaluation_config(self) -> ModelEvaluationConfig:
+        config = self.config.model_evaluation        
+        params = self.params.XGBClassifier
+        schema =  self.schema.TARGET_COLUMN
+
+        create_directories([config.root_dir])        
+
+        model_evaluation_config = ModelEvaluationConfig(
+            root_dir=config.root_dir,
+            X_test_data_path = config.X_test_data_path,
+            y_test_data_path = config.y_test_data_path,
+            model_path = config.model_path,
+            all_params=params,
+            metric_file_name = config.metric_file_name,
+            target_column = schema.name           
+        )
+
+        return model_evaluation_config
